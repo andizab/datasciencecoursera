@@ -34,7 +34,7 @@ colnames(mergedData) <- c("Subject", "activity_code", descriFeatures)
 selectedData <- select(mergedData, Subject, activity_code, contains("mean"), contains("std"))
 
 ## label the activities with descriptive activity names
-selectedData$activity_code <- activities[, 2]
+selectedData$activity_code <- activities[selectedData$activity_code, 2]
 
 ## label the data set with descriptive variable names
 names(selectedData)[2] <- "Activity"
@@ -45,7 +45,7 @@ names(selectedData) <- gsub("Gyro", "Gyroscope", names(selectedData))
 names(selectedData) <- gsub("Mag", "Magnitude", names(selectedData))
 names(selectedData) <- gsub("^t", "Time-", names(selectedData))
 names(selectedData) <- gsub("^f", "Frequency-", names(selectedData))
-names(selectedData) <- gsub("-meanFreq()", "MeanFrequency", names(selectedData))
+names(selectedData) <- gsub("-meanFreq()", "MeanFrequency", names(selectedData), ignore.case = TRUE)
 names(selectedData) <- gsub("angle", "Angle", names(selectedData))
 names(selectedData) <- gsub("tBody", "TimeBody", names(selectedData))
 names(selectedData) <- gsub("gravity", "Gravity", names(selectedData))
